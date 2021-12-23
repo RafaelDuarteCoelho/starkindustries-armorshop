@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1> Wecolme to Stark Industries</h1>
+    <h2> you're logged in as {{name}} </h2>
+    <form action="">
+        <div class="mb-3">
+          <label for="searchArmor" class="form-label">
+              Search for Armor:
+          </label>
+          
+          <input type="text" class="form-control" name="searchArmor" />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
+      <p> Searching for {{searchTerm}} </p>
+
+    <div class= "row row-cols-1 row-cols-md-3 g-4">
+        {% for armor in armors %}
+        <div v-for="armor in armors" class="col">
+            <div class ="card">
+                <img class="card-img-top" src="{{ armor.image.url }}" />
+                <div class="card-body">
+                    <a href="{% url 'detail' armor.id %}">
+                    <h5 class="card-title fw-bold">{{ armor.title }} </h5>
+                    </a>
+                    <p class="card-text">{{ armor.description }}</p>
+                    {% if armor.url %}
+                    <a href="{{armor.url}}" class="btn btn-primary"> Armor Link </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+       <br />
+       <br />
+</div>
+{% endblock content %}
